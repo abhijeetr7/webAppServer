@@ -1,0 +1,111 @@
+create table tbdynamicForm(
+	 id int(11) AUTO_INCREMENT NOT NULL,
+	 masterName varchar(100) DEFAULT NULL,
+	 tableName varchar(100) DEFAULT NULL,
+	 inputName varchar(100) DEFAULT NULL,
+	 component varchar(100) DEFAULT NULL,
+	 dataType varchar(100) DEFAULT NULL,
+	 maxLength int(10) DEFAULT NULL,
+	 query varchar(500) DEFAULT NULL,
+	 mandatory char(1) DEFAULT NULL,
+	 validationMsg varchar(500) DEFAULT NULL,
+	 sequence int(10) DEFAULT NULL,
+	 activeStatus char(1) DEFAULT 'Y',
+     primary key(id)
+ );
+ 
+ ALTER TABLE tbpipelinedtl
+ADD COLUMN sequence INT(10) DEFAULT NULL;
+
+create table tbdropdown(
+	id int(11) AUTO_INCREMENT NOT NULL,
+	name varchar(50) DEFAULT NULL,
+	type varchar(50) DEFAULT NULL,
+	page varchar(50) DEFAULT NULL,
+	activeStatus char(1) DEFAULT 'Y',
+    primary key(id)
+);
+
+create table tbcountry (
+	id int AUTO_INCREMENT NOT NULL,
+	code varchar(50) DEFAULT NULL,
+	name varchar(100) DEFAULT NULL,
+	dateTime datetime DEFAULT NULL,
+	activeStatus char(1) DEFAULT 'Y',
+	primary key(id)
+);
+
+alter table tbstate modify column Country int(10) DEFAULT NULL;
+
+create table tbcity (
+	id int AUTO_INCREMENT NOT NULL,
+	code varchar(50) DEFAULT NULL,
+	name varchar(100) DEFAULT NULL,
+	countryid int(10) DEFAULT NULL,
+	stateid int(10) DEFAULT NULL,
+	dateTime datetime DEFAULT NULL,
+	activeStatus char(1) DEFAULT 'Y',
+	primary key(id)
+);
+
+alter table tblocality add column country int(10) DEFAULT NULL;
+alter table tblocality add column state int(10) DEFAULT NULL;
+alter table tblocality add column city int(10) DEFAULT NULL;
+alter table tblocality add column localeid int(10) DEFAULT NULL;
+alter table tblocality add column pincode varchar(20) DEFAULT NULL;
+
+alter table tblocale add column city int(10) DEFAULT NULL;
+
+create table tbcustomertype (
+	id int AUTO_INCREMENT NOT NULL,
+	code varchar(30) DEFAULT NULL,
+	type varchar(50) DEFAULT NULL,
+	dateTime datetime DEFAULT NULL,
+	activeStatus char(1) DEFAULT 'Y',
+	primary key(id)
+);
+
+create table tbcustomertypeworkflow(
+	id int(11) AUTO_INCREMENT NOT NULL,
+	customertypeid int(11) DEFAULT NULL,
+	salesTC char(1) DEFAULT 'N',
+	salesSQ char(1) DEFAULT 'N',
+	salesGSTS char(1) DEFAULT 'N',
+	salesmail char(1) DEFAULT 'N',
+	salessms char(1) DEFAULT 'N',
+	orderAcceptance varchar(50) DEFAULT NULL,
+	installation varchar(50) DEFAULT NULL,
+	service varchar(50) DEFAULT NULL,
+	serviceTC char(1) DEFAULT 'N',
+	serviceSQ char(1) DEFAULT 'N',
+	servcieGSTS char(1) DEFAULT 'N',
+	servicemail char(1) DEFAULT 'N',
+	servicesms char(1) DEFAULT 'N',
+	userid int(11) DEFAULT NULL,
+	dateTime datetime DEFAULT NULL,
+	activeStatus char(1) DEFAULT 'Y',
+	primary key(id)
+);
+
+
+create table tbresourcecustomertype(
+	id int(11) AUTO_INCREMENT NOT NULL,
+	typeid int(11) DEFAULT NULL,
+	resourceid int(11) DEFAULT NULL,
+	userid int(11) DEFAULT NULL,
+	activeStatus char(1) DEFAULT 'Y',
+	dateTime datetime DEFAULT NULL,
+    primary key(id)
+);
+
+
+
+
+/// Vyankatesh 
+alter table tbaccount add column maplocation varchar(100) default null;
+alter table tbaccount add column localityid int(11) default null;
+alter table tbaccount add column customertypeid int(11) default null;
+alter table tbaccount add column constitutionid int default null;
+
+
+

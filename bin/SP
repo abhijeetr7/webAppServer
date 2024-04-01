@@ -1,0 +1,123 @@
+//RESOURCE LOCATIONS BY RESOURCE ID
+
+DELIMITER //
+CREATE  PROCEDURE findLocationsByResource(IN resource int(11))
+BEGIN
+SELECT * FROM tbresourcelocationrights WHERE activeStatus='Y' and  assignBy=resource;
+END//
+
+
+//FIND LOCALES BY AREA ID
+
+DELIMITER //
+CREATE  PROCEDURE findLocalesByArea(IN area int(11))
+BEGIN
+SELECT * FROM tblocale WHERE activeStatus='Y' and  areaID=area;
+END//
+
+
+//FIND LOCATIONS BY RESOURCE AND LOCALE
+
+DELIMITER //
+CREATE  PROCEDURE findbyresourceandlocaleid(IN resource int(11), IN locale int(11))
+BEGIN
+SELECT * FROM tbresourcelocationrights WHERE activeStatus='Y' and assignBy=resource and  localeID=locale;
+END//
+
+
+//FIND PRODUCT CATEGORY BY RESOURCE
+
+DELIMITER //
+CREATE  PROCEDURE findprocatbyresorce(IN resource int(11))
+BEGIN
+SELECT * FROM tbresourceproductcategoryright WHERE activeStatus='Y' and assignBy=resource;
+END//
+
+
+FIND By product categoy and resource id
+
+DELIMITER //
+CREATE  PROCEDURE findbyprocatandresorce(IN resource int(11), IN catid int(11))
+BEGIN
+SELECT * FROM tbresourceproductcategoryright WHERE  assignBy=resource and productCategoryID=catid;
+END//
+
+
+//find teamarea by teamid
+
+DELIMITER //
+CREATE  PROCEDURE findTeamareaByTeamid(IN teamid int(11))
+BEGIN
+SELECT * FROM tbteamarea WHERE  teamMasterID=teamid and activeStatus='Y';
+END//
+
+
+//find area by region id
+
+DELIMITER //
+CREATE  PROCEDURE findByregionid(IN regionid int(11))
+BEGIN
+SELECT * FROM tbarea WHERE  regionID=regionid and activeStatus='Y';
+END//
+
+
+//find product category by team id
+
+DELIMITER //
+CREATE  PROCEDURE findPCbyTeamid(IN teamid int(11))
+BEGIN
+SELECT * FROM tbteamproductcategory WHERE  teamMasterID=teamid and activeStatus='Y';
+END//
+
+
+//find members of team
+
+DELIMITER //
+CREATE  PROCEDURE findmemberbyTeamid(IN teamid int(11))
+BEGIN
+SELECT * FROM tbteammember WHERE  teamMasterID=teamid and activeStatuss='Y';
+END//
+
+//Locale id by areaids
+
+DELIMITER //
+CREATE  PROCEDURE findLocalesByAreaids(IN areaids varchar(500))
+BEGIN
+SELECT localeID FROM tblocale WHERE activeStatus='Y' and FIND_IN_SET(areaID, areaids);
+END//
+
+
+//Resources by localeids
+
+DELIMITER //
+CREATE  PROCEDURE findResourcesByLocales(IN locals varchar(500))
+BEGIN
+SELECT assignBy FROM tbresourcelocationrights WHERE activeStatus='Y' and FIND_IN_SET(localeID, locals) group by assignBy;
+END//
+
+
+//Find resources by product category
+
+DELIMITER //
+CREATE  PROCEDURE findResourcesByProductcate(IN procat varchar(500))
+BEGIN
+SELECT assignBy FROM tbresourceproductcategoryright WHERE activeStatus='Y' and FIND_IN_SET(productCategoryID, procat) group by assignBy;
+END//
+
+
+//Get resources by customer types
+
+DELIMITER //
+CREATE  PROCEDURE findResourcesByType(IN ty varchar(500))
+BEGIN
+SELECT resourceid FROM tbresourcecustomertype WHERE activeStatus='Y' and FIND_IN_SET(typeid, ty);
+END//
+
+
+//Get types by resources
+
+DELIMITER //
+CREATE  PROCEDURE findTypesByResources(IN res varchar(500))
+BEGIN
+SELECT * FROM tbresourcecustomertype WHERE activeStatus='Y' and FIND_IN_SET(resourceid, res);
+END//
